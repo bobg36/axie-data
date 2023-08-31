@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .tab-image {
+            height: 100px; /* Set the desired height */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar sticky">
+        <ul class="tabs">
+            {% for image_path in image_list %}
+                <li>
+                    <a href="{{ url_for('index', folder_index=loop.index0) }}">
+                        <img src="{{ url_for('static', filename=image_path) }}" alt="Tab {{ loop.index }}" class="tab-image">
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="image-container">
+        {% if image_filenames %}
+            {% for filename in image_filenames %}
+                <img src="{{ url_for('static', filename=filename) }}" class="stacked-image">
+            {% endfor %}
+        {% else %}
+            <p>No images to display.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
